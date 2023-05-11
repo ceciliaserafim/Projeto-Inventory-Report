@@ -31,7 +31,8 @@ class SimpleReport:
         frequencia_empresa = Counter(empresas).most_common()
         mais_frequente = frequencia_empresa[0]
 
-        return (f"Data de fabricação mais antiga: {min(lista)}\n"
-                f"Data de validade mais próxima: {min(lista_validade)}\n"
-                f"Empresa com mais produtos: {mais_frequente[0]}")
-    
+        return (
+            f"Data de fabricação mais antiga: {min(lista)}\n"
+            f"Data de validade mais próxima: {min(lista_validade)}\n"
+            f"Empresa com mais produtos: {mais_frequente[0]}"
+        )
