@@ -1,15 +1,15 @@
 from inventory_report.reports.simple_report import SimpleReport
 from inventory_report.reports.complete_report import CompleteReport
-from ..importer.csv_importer import Csv
-from ..importer.json_importer import Json
-from ..importer.xml_importer import Xml
+from ..importer.csv_importer import CsvImporter
+from ..importer.json_importer import JsonImporter
+from ..importer.xml_importer import XmlImporter
 
 
 class Inventory:
     select_file = {
-        ".csv": Csv(),
-        "json": Json(),
-        ".xml": Xml(),
+        ".csv": CsvImporter(),
+        "json": JsonImporter(),
+        ".xml": XmlImporter(),
     }
     reports = {
         "simples": SimpleReport,

@@ -2,7 +2,7 @@ import json
 from .importer import Importer
 
 
-class Json(Importer):
+class JsonImporter(Importer):
     @classmethod
     def import_data(cls, file_path):
         if not file_path.endswith(".json"):

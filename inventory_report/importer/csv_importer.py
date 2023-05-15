@@ -2,7 +2,7 @@ import csv
 from .importer import Importer
 
 
-class Csv(Importer):
+class CsvImporter(Importer):
     @classmethod
     def import_data(cls, file_path):
         if not file_path.endswith(".csv"):

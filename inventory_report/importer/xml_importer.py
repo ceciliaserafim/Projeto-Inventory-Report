@@ -2,7 +2,7 @@ import xmltodict
 from .importer import Importer
 
 
-class Xml(Importer):
+class XmlImporter(Importer):
     @classmethod
     def import_data(cls, file_path):
         if not file_path.endswith(".xml"):
