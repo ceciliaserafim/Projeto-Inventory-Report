@@ -1,31 +1,27 @@
 from inventory_report.reports.simple_report import SimpleReport
 from inventory_report.reports.complete_report import CompleteReport
-import csv
+from ..importer.csv_importer import Csv
+from ..importer.json_importer import Json
+from ..importer.xml_importer import Xml
 
 
-class Inventory():
-    @classmethod
-    def read_csv(cls, file_path):
-        read = csv.DictReader(file_path)
-        return list(read)
-
-    @classmethod
-    def import_data(cls, file_path, type):
-        if not file_path.endswith(".csv"):
-            raise ValueError("Extensão inválida")
-
-        with open(file_path) as file_name:
-            if file_path.endswith(".csv"):
-                lista = Inventory.read_csv(file_name)
-                return Inventory.generate_type(type, lista)
+class Inventory:
+    select_file = {
+        ".csv": Csv(),
+        "json": Json(),
+        ".xml": Xml(),
+    }
+    reports = {
+        "simples": SimpleReport,
+        "completo": CompleteReport,
+    }
 
     @classmethod
-    def generate_type(cls, type, list):
-        if type == "simples":
-            return SimpleReport.generate(list)
-        if type == "completo":
-            return CompleteReport.generate(list)
+    def import_data(cls, file_path: str, type: str):
+        extension = file_path[-4:]
 
-
-if __name__ == "__main__":
-    print(Inventory.read_csv("data/inventory.csv"))
+        if extension not in cls.select_file:
+            raise ValueError("Arquivo inválido")
+        return cls.reports[type].generate(
+            cls.select_file[extension].import_data(file_path)
+        )
